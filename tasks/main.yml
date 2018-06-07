@@ -6,11 +6,11 @@
     state: installed
 
 - name: Install for systemV
-  include: systemv.yml
+  include_tasks: systemv.yml
   when: ansible_service_mgr != "systemd"
 
 - name: Install for systemd
-  include: systemd.yml
+  include_tasks: systemd.yml
   when: ansible_service_mgr == "systemd"
 
 - name: "Configure display environment variable"

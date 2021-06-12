@@ -1,14 +1,16 @@
 ---
-- name: "systemv - Create Xvfb deamon script"
-  template:
-        src=init-xvfb.j2
-        dest=/etc/init.d/xvfb
-        mode=755
+- name: "Create Xvfb deamon script (systemv)"
+  become: true
+  ansible.builtin.template:
+    src: init-xvfb.j2
+    dest: /etc/init.d/xvfb
+    mode: 0755
 
-- name: "systemv - Configure Xvfb automatic startup < 16.04"
-  service:
-        name=xvfb
-        pattern=/usr/bin/Xvfb
-        enabled=yes
-        state=started
+- name: "Configure Xvfb automatic startup < 16.04 (systemv)"
+  become: true
+  ansible.builtin.service:
+    name: xvfb
+    pattern: /usr/bin/Xvfb
+    enabled: !!str yes
+    state: started
 
